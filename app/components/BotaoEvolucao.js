@@ -1,14 +1,26 @@
 'use client';
 
+const UTM = {
+  utm_source: 'animeland',
+  utm_medium: 'migration_button',
+  utm_campaign: 'portal_antigo',
+};
+
 function montarUrlDestino() {
-  const base = atob('aHR0cHM6Ly9hbmltZWxvdWQuY29tLmJy');
-  if (typeof window === 'undefined') return base;
-  return (
-    base.replace(/\/$/, '') +
+  const base = atob('aHR0cHM6Ly9hbmltZWxvdWQuY29tLmJy').replace(/\/$/, '');
+  if (typeof window === 'undefined') return base + '/';
+
+  const relative =
     window.location.pathname +
     window.location.search +
-    window.location.hash
-  );
+    window.location.hash;
+  const url = new URL(relative, base + '/');
+  const params = new URLSearchParams(url.search);
+  for (const [key, value] of Object.entries(UTM)) {
+    params.set(key, value);
+  }
+  url.search = params.toString();
+  return url.href;
 }
 
 export default function BotaoEvolucao({ label = 'Acessar novo portal' }) {
