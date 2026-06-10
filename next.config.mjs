@@ -4,8 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/:path*",
-        destination:
-          "https://animeloud.com.br/:path*?utm_source=animeland&utm_medium=301_redirect&utm_campaign=portal_antigo",
+        destination: "https://animeloud.com.br/:path*",
         statusCode: 301,
       },
     ];
