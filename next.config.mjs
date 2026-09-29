@@ -3,9 +3,10 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/:path*",
+        // Keep Bing verification reachable; redirect everything else
+        source: "/:path((?!BingSiteAuth\\.xml$).*)",
         destination:
-          "https://animeloud.com.br/:path*?utm_source=animeland&utm_medium=redirect&utm_campaign=portal_antigo",
+          "https://animeloud.com.br/:path?utm_source=animeland&utm_medium=redirect&utm_campaign=portal_antigo",
         statusCode: 301,
       },
     ];
